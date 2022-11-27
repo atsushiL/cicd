@@ -1,0 +1,37 @@
+name: add-release-tag
+
+on:
+    pull_request:
+        # PRが閉じたタイミングで実行
+        types:
+            - closed
+        # mainブランチのみを対象とする
+        branches:
+            - main
+
+jobs:
+    release:
+        # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#check_run
+        # githubのpull_requestがマージされた場合にのみ実施する
+        if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'release')
+        runs-on: ubuntu-latest
+        steps:
+            # releaseタグを作成する対象のコードを取得するため、checkout
+            - name: Check out repository code
+              # https://zenn.dev/m_norii/articles/349b9ce0260631
+              uses: actions/checkout@v2
+            - name: Create Release
+              id: create_release
+              uses: actions/create-release@v1
+              env:
+                  # このトークンは自動生成されるのでsecretsを登録する必要ない
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  # PRのタイトルと内容をRelease内容に追加する
+                  RELEASE_TAG: ${{ github.event.pull_request.title }}
+                  BODY: ${{ github.event.pull_request.body }}
+              # どんな内容のリリースタグを作成するか
+              with:
+                  # タグ名
+                  tag_name: ${{ env.RELEASE_TAG }}
+                  release_name: Release ${{ env.RELEASE_TAG }}
+                  body: ${{ env.BODY }}

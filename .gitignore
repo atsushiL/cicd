@@ -1,0 +1,41 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/application/node_modules
+/application/.pnp
+/application/.pnp.js
+
+# testing
+/application/coverage
+
+# next.js
+/application/.next/
+/application/out/
+
+# production
+/application/build
+
+# misc
+/application/.DS_Store
+/application/*.pem
+
+# debug
+/application/npm-debug.log*
+/application/yarn-debug.log*
+/appliction/yarn-error.log*
+/appliction/.pnpm-debug.log*
+
+# local env files
+/appliction/.env*.local
+
+# vercel
+/appliction/.vercel
+
+# typescript
+/appliction/*.tsbuildinfo
+
+# 環境変数ファイルはバージョン管理から除外
+/application/.env
+.env
+
+.DS_Store

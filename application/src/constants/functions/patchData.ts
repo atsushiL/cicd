@@ -5,7 +5,7 @@ import { fetch_PATCH } from "./fetch";
 
 export const patchDataForApplyCustomer = (data: Partial<FormValues>, url: string, setReload: (value: SetStateAction<boolean>) => void) => {
     const csrftoken = Cookies.get("csrftoken") || "";
-    const baseUrl = 'http://localhost/back/api/';
+    const baseUrl = 'https://api.stg.crm.agsmileleaseback.co.jp/api/';
     const credentials = 'same-origin';
     const statusHandler = (text: string) => {
         switch (text) {

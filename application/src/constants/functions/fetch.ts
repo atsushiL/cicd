@@ -34,7 +34,7 @@ export const fetch_POST = ({ url, body, resFunction }: Props) => {
             "X-CSRFToken": csrftoken,
         },
         body: body,
-        credentials: credentials,
+        credentials: "include",
     })
         .then(resFunction)
         .catch((error) => {
@@ -52,7 +52,7 @@ export const fetch_POST_DATA = ({ url, body, resFunction }: Props) => {
             "X-CSRFToken": csrftoken,
         },
         body: body,
-        credentials: credentials,
+        credentials: "include",
     })
         .then((res) => res.json())
         .then(resFunction)
@@ -69,7 +69,7 @@ export const fetch_GET = ({ url, resFunction }: GetProps) => {
         headers: {
             "X-CSRFToken": csrftoken,
         },
-        credentials: credentials,
+        credentials: "include",
     })
         .then((response) => response.json())
         .then(resFunction)
@@ -81,7 +81,7 @@ export const fetch_GET = ({ url, resFunction }: GetProps) => {
 export const fetch_PATCH = ({ dirty, url, body, resFunction }: Props) => {
     const csrftoken = Cookies.get("csrftoken") || "";
     const values = JSON.parse(body!);
-    
+
     for (const [key, value] of Object.entries(values)) {
         //もし鍵は入っていない場合、バリューは変更してないし、PATCHの場合いらないから消す
         if (!(key in dirty!)) {
@@ -99,7 +99,7 @@ export const fetch_PATCH = ({ dirty, url, body, resFunction }: Props) => {
             "X-CSRFToken": csrftoken,
         },
         body: JSON.stringify(values),
-        credentials: credentials,
+        credentials: "include",
     })
         .then(resFunction)
         .catch((error) => {
@@ -112,7 +112,7 @@ export const fetch_LOGIN = ({ url, body, resFunction, loginRouting }: LoginProps
 
     fetch(baseUrl + url, {
         method: "POST",
-        credentials: credentials,
+        credentials: "include",
         headers: {
             "Content-type": "application/json",
             "X-CSRFToken": csrftoken,
@@ -125,4 +125,3 @@ export const fetch_LOGIN = ({ url, body, resFunction, loginRouting }: LoginProps
             throw new Error('Something wrong');
         });
 };
-

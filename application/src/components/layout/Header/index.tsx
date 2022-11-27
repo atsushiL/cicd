@@ -11,7 +11,7 @@ export const Header = () => {
   const router = useRouter();
   const [userInfo, setUserInfo] = useState<UserValue>();
   const fetchUser = async () => {
-    const res = await fetch(`/back/api/user/user_info/`, {
+    const res = await fetch(`https://api.stg.crm.agsmileleaseback.co.jp/api/user/user_info/`, {
       method: 'GET',
       credentials: 'include',
       headers: {
